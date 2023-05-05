@@ -1,2 +1,0 @@
-# DuckHuntPOO
-Juego tipo DuckHunt
