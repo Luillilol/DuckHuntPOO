@@ -2,7 +2,9 @@ package fes.aragon.controller;
 
 import java.io.IOException;
 
+import fes.aragon.extras.MusicaCiclica;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,9 +14,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class InicioController {
+	private Scene escena;
+	private Thread hiloFondo;
 
+	public JuegoController hola;
     @FXML
     private Button btnCreditos;
 
@@ -27,6 +33,48 @@ public class InicioController {
     @FXML
     private Text txtTitulo;
 
+    /*Cosas para que el main funcione*/
+    public void iniciar() {
+		componentesIniciar();
+//		
+//		pintar();
+//		eventosTeclado();
+//		ciclo();
+	}
+
+    private void componentesIniciar() {
+//		graficos = canvas.getGraphicsContext2D();
+//		MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
+//		hiloFondo = new Thread(entrada);
+//		hiloFondo.start();
+//		enemigos = new Enemigos(20, 20, null, 1);
+//		fondo=new Fondo(0, 0,"/fes/aragon/resource/fondo/img (1).gif" , 4,24);
+//		nave=new Nave(20,255,"/fes/aragon/resource/navefinal.png",2);
+//		nave.setrEnemigo(enemigos.getEnemigos());
+//		disparos=new Disparos(0, 0, null, 2);
+//		nave.setDisparos(disparos);
+		
+	}
+    
+    public void setEscena(Scene escena) {
+		this.escena = escena;
+		
+	}
+    
+    public void eventosVentana() {
+		Stage escenario=(Stage)escena.getWindow();
+		escenario.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				hiloFondo.stop();
+			}
+		});
+    }
+	
+    
+	
     
     
     
@@ -41,12 +89,18 @@ public class InicioController {
     @FXML
     void instrucciones(ActionEvent event) {
     	System.out.println("Instrucciones");
+    	this.nuevaVentana("Instrucciones");
+    	this.cerrarVentana(btnInstruciones);
     }
 
     @FXML
     void jugar(ActionEvent event) {
     	System.out.println("JUGAR");
-    
+    	this.nuevaVentana("Juego");
+    	this.cerrarVentana(btnJugar);
+    	
+//    	JuegoController nuevo = new JuegoController();
+//    	nuevo.iniciar();
     }
     
     public void nuevaVentana(String archivo) {
@@ -69,6 +123,11 @@ public class InicioController {
 		Stage stage = (Stage) boton.getScene().getWindow();
 		stage.close();
 	}
+    
+    
+    
+    
+    
 	
     
     
