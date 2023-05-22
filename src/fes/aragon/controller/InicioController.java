@@ -3,6 +3,7 @@ package fes.aragon.controller;
 import java.io.IOException;
 
 import fes.aragon.extras.MusicaCiclica;
+import fes.aragon.controller.JuegoController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.stage.WindowEvent;
 
 public class InicioController {
 	private Scene escena;
+	private Scene escenaJuego;
 	private Thread hiloFondo;
 
 	public JuegoController hola;
@@ -105,10 +107,13 @@ public class InicioController {
     
     public void nuevaVentana(String archivo) {
 		try  {
-			Pane root = (Pane) FXMLLoader.load(getClass().getResource("/fes/aragon/fxml/" + archivo + ".fxml"));
-			Scene scene = new Scene(root);
+		
+			FXMLLoader root = new FXMLLoader(getClass().getResource("/fes/aragon/fxml/"+archivo+".fxml"));
+			Scene scene = new Scene(root.load());
 			Stage escenario = new Stage();
-			escenario.setScene(scene);
+//			JuegoController hola = root.getController();
+//			hola.setEscena(scene);
+			 escenario.setScene(scene);
 //			escenario.initStyle(StageStyle.UNDECORATED);
 			escenario.initModality(Modality.APPLICATION_MODAL);
 			escenario.show();
