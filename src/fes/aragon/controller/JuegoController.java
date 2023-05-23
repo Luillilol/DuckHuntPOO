@@ -54,8 +54,8 @@ public class JuegoController implements Initializable{
 		
 		/*cargarfondo*/
 		fondo=new Fondo(0, 0,"/fes/aragon/resource/fondo.jpg",1,2);
-		pato1= new Pato(0, 0, "/fes/aragon/resource/pato1.png", 4,3);
-		pato2= new Pato(0, 0, "/fes/aragon/resource/pato1.png", 4,3);
+		pato1= new Pato(0, 0, "/fes/aragon/resource/pato1Volteado.png", 4,3);
+		pato2= new Pato(0, 0, "/fes/aragon/resource/pato1Volteado.png", 4,3);
 		mira = new Mira(0,0,"/fes/aragon/resource/mira.png",1,1);
 //		nave=new Nave(20,255,"/fes/aragon/resource/navefinal.png",2);
 //		nave.setrEnemigo(enemigos.getEnemigos());

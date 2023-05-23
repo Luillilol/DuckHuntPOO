@@ -14,6 +14,10 @@ public class Pato extends ComponentesJuego{
 	private int coordAlX;
 	private int coordAlY;
 	
+	//Valores de estimacion de dimensiones de los patos: 72 altura 54 ancho
+	private int coordenadasX;
+	private int coordenadasY;
+	
 	private double tiempo;
 	private double tiempoFrame=.2;
 	private int indice=0;
@@ -40,6 +44,9 @@ public class Pato extends ComponentesJuego{
 		//coords aleatorias de aparicion del pato 
 		coordAlX = (int) (Math.random()*810);
 		coordAlY = (int) (Math.random()*350);
+		coordenadasX=coordAlX;
+		coordenadasY=coordAlY;
+		this.rumboAleatorio();
 		//establecer el timer para el movimiento aleatorio del pat
 		this.temporizador();
 		String ruta="";
@@ -51,6 +58,30 @@ public class Pato extends ComponentesJuego{
 		// TODO Auto-generated constructor stub
 	}
 	
+	private void rumboAleatorio() {
+		int i = (int) (Math.random()*2)+1; // i representa arriba y abajo
+		int j = (int) (Math.random()*2)+1; // j representa izq y derecha
+		System.out.println("Num aleatorio de derecha e izquierda");
+//		System.out.println("num aleatorio:"+i);
+		if(i==1) {
+			this.arriba=true;
+			this.abajo=false;
+		}else if(i==2){
+			this.abajo=true;
+			this.arriba=false;
+		}
+		
+		if(j==1) {
+			this.izquierda=true;
+			this.derecha=false;
+			System.out.println("Izqueirda TRUE");
+		}else if(j==2){
+			this.derecha=true;
+			this.izquierda=false;
+			System.out.println("DERECHA TRUE");			
+		}
+		
+	}
 	
 	public void temporizador(){
 		Timer timer = new Timer();
@@ -60,10 +91,11 @@ public class Pato extends ComponentesJuego{
 			public void run() {
 				// TODO Auto-generated method stub
 				System.out.println("TEMPORIZADOR PATOS");
+//				rumboAleatorio();
 			}
 			
 		};		
-		timer.schedule(task,1,500);
+		timer.schedule(task,1,1000);
 	}
 	
 	
@@ -72,7 +104,7 @@ public class Pato extends ComponentesJuego{
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stubs
-		graficos.drawImage(imagenes.get(indice),coordAlX,coordAlY, 72,54);
+		graficos.drawImage(imagenes.get(indice),coordenadasX,coordenadasY, 72,54);
 //		System.out.println("PATOPATOPATOPAT");
 		
 	}
@@ -92,9 +124,63 @@ public class Pato extends ComponentesJuego{
 	@Override
 	public void logicaCalculos() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("logica calculos");
 		//Parte que se encarga del calculo del tiempo y del gif
 //		System.out.println("Tiempo frame:"+tiempoFrame)
+		
+		if(this.coordenadasX<=0) {
+			//si se pasa checar de nuevo cuál es true y cambiarla a false
+			this.izquierda=false;
+			this.derecha=true;			
+		}
+		
+		if(this.coordenadasX>=830) {
+			//si se pasa checar de nuevo cuál es true y cambiarla a false
+			this.izquierda=true;
+			this.derecha=false;			
+		}
+		
+		
+		if(this.coordenadasY<=0) {
+			this.arriba=false;
+			this.abajo=true;
+			System.out.println("IR ABAJO"+this.coordenadasY);
+			
+		}
+		if(this.coordenadasY>=350) {
+			this.arriba=true;
+			this.abajo=false;			
+		}
+		
+		
+//		if(this.coordenadasY<=0) {
+//			this.arriba=false;
+//			this.abajo=true;
+//			System.out.println("ME FUI ARRIB"+this.arriba);
+//			
+////		}
+//		if(this.coordenadasY>=650);{
+//			this.arriba=true;			 
+//			this.abajo=false;
+//		}
+//		
+		
+		
+		
+		if((this.derecha==true)&&(this.izquierda==false)) {
+			this.coordenadasX++;
+		}else if(this.izquierda==true && this.derecha==false) {
+			this.coordenadasX--;
+		}
+		
+		if(this.arriba==true && this.abajo==false) {
+			this.coordenadasY--;
+		}else if(this.abajo==true && this.arriba==false) {
+			this.coordenadasY++;
+		}
+		
+		
+//		imagenes.add(new Image(ruta));
 		if((tiempo>tiempoFrame)) {
 			if(this.indice<imagenes.size()-1) {
 				indice++;
