@@ -6,8 +6,11 @@ import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 
 public class Mira extends ComponentesJuego{
+	
+	private Rectangle r;
 	private ArrayList<Image> imagenes=new ArrayList<>();
 	private int coordAlX;
 	private int coordAlY;
@@ -39,6 +42,8 @@ public class Mira extends ComponentesJuego{
 //		}
 //		System.out.println("Ruta:"+ruta);
 		imagenes.add(new Image(imagen)); 
+		
+		r= new Rectangle(x, y, 120,120);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -50,6 +55,7 @@ public class Mira extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
 		graficos.drawImage(imagenes.get(indice),coordenadaX,coordenadaY, 150,150);
+		graficos.strokeRect(r.getX()+15, r.getY()+15, r.getWidth(), r.getHeight());
 		
 	}
 
@@ -122,16 +128,19 @@ public class Mira extends ComponentesJuego{
 			coordenadaY += 3;
 		}
 		
-		
-//		System.out.println("Tiempo frame:"+tiempoFrame);
-//		if((tiempo>tiempoFrame)) {
-//			if(this.indice<imagenes.size()-1) {
-//				indice++;
-//				tiempoFrame+=.2;
-//			}else {
-//				indice=0;
-//			}	
-//		}
+		this.r.setX(coordenadaX);
+		this.r.setY(coordenadaY);
+		/*Colision otro codigo*/
+//		int i=0;
+//		boolean col=false;
+//		for (Rectangle rec : rEnemigo) {			
+//			if (this.r.getBoundsInLocal().intersects((rec.getBoundsInLocal()))) {
+//				System.out.println("Colision");
+//				col=true;
+//				break;
+//			}
+//			i++;
+//		}	
 		
 	}
 	

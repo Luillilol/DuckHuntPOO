@@ -48,7 +48,7 @@ public class JuegoController implements Initializable{
 		/*carga la musica*/
 		MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
 		hiloFondo = new Thread(entrada);
-//		hiloFondo.start();
+		hiloFondo.start();
 		
 //		enemigos = new Enemigos(20, 20, null, 1);
 		

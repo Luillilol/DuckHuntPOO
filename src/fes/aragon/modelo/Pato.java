@@ -8,8 +8,11 @@ import java.util.TimerTask;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 
 public class Pato extends ComponentesJuego{
+	
+	private Rectangle r;
 	private ArrayList<Image> imagenes=new ArrayList<>();
 	private int coordAlX;
 	private int coordAlY;
@@ -37,7 +40,7 @@ public class Pato extends ComponentesJuego{
 //		
 //	};
 //	
-	
+	//hola
 	public Pato(int x, int y, String imagen, int velocidad, int frames) {
 		super(x, y, imagen, velocidad);
 		this.frames=frames;
@@ -48,12 +51,14 @@ public class Pato extends ComponentesJuego{
 		coordenadasY=coordAlY;
 		this.rumboAleatorio();
 		//establecer el timer para el movimiento aleatorio del pat
-		this.temporizador();
+		//this.temporizador();
 		String ruta="";
 		for(int i=1;i<=frames;i++) {
 			ruta=imagen.replace("1", i+"");
 			imagenes.add(new Image(ruta));
 		}
+		r= new Rectangle(x, y, 72,54);
+		
 //		imagenes.add(new Image(imagen)); 
 		// TODO Auto-generated constructor stub
 	}
@@ -83,7 +88,7 @@ public class Pato extends ComponentesJuego{
 		
 	}
 	
-	public void temporizador(){
+	/*public void temporizador(){
 		Timer timer = new Timer();
 		TimerTask task =new TimerTask() {
 
@@ -96,7 +101,7 @@ public class Pato extends ComponentesJuego{
 			
 		};		
 		timer.schedule(task,1,1000);
-	}
+	}*/
 	
 	
 	
@@ -105,6 +110,8 @@ public class Pato extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stubs
 		graficos.drawImage(imagenes.get(indice),coordenadasX,coordenadasY, 72,54);
+		graficos.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+		
 //		System.out.println("PATOPATOPATOPAT");
 		
 	}
@@ -153,20 +160,6 @@ public class Pato extends ComponentesJuego{
 		}
 		
 		
-//		if(this.coordenadasY<=0) {
-//			this.arriba=false;
-//			this.abajo=true;
-//			System.out.println("ME FUI ARRIB"+this.arriba);
-//			
-////		}
-//		if(this.coordenadasY>=650);{
-//			this.arriba=true;			 
-//			this.abajo=false;
-//		}
-//		
-		
-		
-		
 		if((this.derecha==true)&&(this.izquierda==false)) {
 			this.coordenadasX++;
 		}else if(this.izquierda==true && this.derecha==false) {
@@ -178,6 +171,9 @@ public class Pato extends ComponentesJuego{
 		}else if(this.abajo==true && this.arriba==false) {
 			this.coordenadasY++;
 		}
+		
+		this.r.setX(coordenadasX);
+		this.r.setY(coordenadasY);
 		
 		
 //		imagenes.add(new Image(ruta));

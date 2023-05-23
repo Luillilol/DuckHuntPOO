@@ -55,6 +55,9 @@ public class InicioController {
 //		nave.setrEnemigo(enemigos.getEnemigos());
 //		disparos=new Disparos(0, 0, null, 2);
 //		nave.setDisparos(disparos);
+    	MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
+		hiloFondo = new Thread(entrada);
+//		hiloFondo.start();
 		
 	}
     
@@ -98,6 +101,7 @@ public class InicioController {
     @FXML
     void jugar(ActionEvent event) {
     	System.out.println("JUGAR");
+    	this.hiloFondo.stop();
     	this.nuevaVentana("Juego");
     	this.cerrarVentana(btnJugar);
     	
@@ -116,6 +120,7 @@ public class InicioController {
 			 escenario.setScene(scene);
 //			escenario.initStyle(StageStyle.UNDECORATED);
 			escenario.initModality(Modality.APPLICATION_MODAL);
+			hola.eventosVentana();
 			escenario.show();
 
 		} catch (IOException e) {
