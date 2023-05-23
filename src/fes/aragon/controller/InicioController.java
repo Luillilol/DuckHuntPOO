@@ -111,8 +111,8 @@ public class InicioController {
 			FXMLLoader root = new FXMLLoader(getClass().getResource("/fes/aragon/fxml/"+archivo+".fxml"));
 			Scene scene = new Scene(root.load());
 			Stage escenario = new Stage();
-//			JuegoController hola = root.getController();
-//			hola.setEscena(scene);
+			JuegoController hola = root.getController();
+			hola.setEscena(scene);
 			 escenario.setScene(scene);
 //			escenario.initStyle(StageStyle.UNDECORATED);
 			escenario.initModality(Modality.APPLICATION_MODAL);

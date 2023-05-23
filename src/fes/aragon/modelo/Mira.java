@@ -11,6 +11,8 @@ public class Mira extends ComponentesJuego{
 	private ArrayList<Image> imagenes=new ArrayList<>();
 	private int coordAlX;
 	private int coordAlY;
+	private int coordenadaX=300;
+	private int coordenadaY=150;
 	
 	private double tiempo;
 	private double tiempoFrame=.2;
@@ -47,7 +49,7 @@ public class Mira extends ComponentesJuego{
 	@Override
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
-		graficos.drawImage(imagenes.get(indice),300,150, 150,150);
+		graficos.drawImage(imagenes.get(indice),coordenadaX,coordenadaY, 150,150);
 		
 	}
 
@@ -78,6 +80,22 @@ public class Mira extends ComponentesJuego{
 				break;
 
 			}
+		}else {
+			switch (evento.getCode().toString()) {
+			case "RIGHT":
+				derecha = false;
+				break;
+			case "LEFT":
+				izquierda = false;
+				break;
+			case "UP":
+				arriba = false;
+				break;
+			case "DOWN":
+				abajo = false;
+				break;
+
+			}
 		}
 		
 	}
@@ -91,6 +109,20 @@ public class Mira extends ComponentesJuego{
 	@Override
 	public void logicaCalculos() {
 		// TODO Auto-generated method stub
+		if (derecha) {
+			coordenadaX += 3;
+		}
+		if (izquierda) {
+			coordenadaX -= 3;
+		}
+		if (arriba) {
+			coordenadaY -= 3;
+		}
+		if (abajo) {
+			coordenadaY += 3;
+		}
+		
+		
 //		System.out.println("Tiempo frame:"+tiempoFrame);
 //		if((tiempo>tiempoFrame)) {
 //			if(this.indice<imagenes.size()-1) {

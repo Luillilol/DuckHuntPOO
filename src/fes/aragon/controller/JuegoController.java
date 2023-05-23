@@ -38,7 +38,7 @@ public class JuegoController implements Initializable{
     public void iniciar() {
 		componentesIniciar();		
 		pintar();
-//		eventosTeclado();
+		eventosTeclado();
 		ciclo();
 	}
     
@@ -85,7 +85,7 @@ public class JuegoController implements Initializable{
     private void calculosLogica() {
     	this.pato1.logicaCalculos();
     	this.pato2.logicaCalculos();
-//    	this.mira.logicaCalculos();
+    	this.mira.logicaCalculos();
 //		this.enemigos.logicaCalculos();
 //		this.fondo.logicaCalculos();
 //		this.nave.logicaCalculos();
@@ -99,7 +99,7 @@ public class JuegoController implements Initializable{
 			@Override
 			public void handle(KeyEvent arg0) {				
 				// TODO Auto-generated method stubs
-//				mira.teclado(arg0,true);
+				mira.teclado(arg0,true);
 				
 			}			
 		});
@@ -108,7 +108,7 @@ public class JuegoController implements Initializable{
 			@Override
 			public void handle(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-//				mira.teclado(arg0,false);
+				mira.teclado(arg0,false);
 			
 			}
 			
@@ -131,6 +131,7 @@ private void pintar() {
     public void setEscena(Scene escena) {
 		this.escena = escena;	
 		System.out.println("ESTABLECER ESCENEA ENUEGO");
+		initialize(null, null);
 	}
     
     public void eventosVentana() {
@@ -149,8 +150,9 @@ private void pintar() {
     	/*PRUEBA*/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.iniciar();
-		
+		if(escena!= null) {
+			this.iniciar();			
+		}
 		
 	}
     
