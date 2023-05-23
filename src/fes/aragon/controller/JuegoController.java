@@ -28,6 +28,7 @@ public class JuegoController implements Initializable{
 	private GraphicsContext graficos;
 	private Fondo fondo;
 	private Pato pato1;
+	private Pato pato2;
 	private Mira mira;
 	private Thread hiloFondo;
 	
@@ -37,7 +38,7 @@ public class JuegoController implements Initializable{
     public void iniciar() {
 		componentesIniciar();		
 		pintar();
-		eventosTeclado();
+//		eventosTeclado();
 		ciclo();
 	}
     
@@ -54,6 +55,7 @@ public class JuegoController implements Initializable{
 		/*cargarfondo*/
 		fondo=new Fondo(0, 0,"/fes/aragon/resource/fondo.jpg",1,2);
 		pato1= new Pato(0, 0, "/fes/aragon/resource/pato1.png", 4,3);
+		pato2= new Pato(0, 0, "/fes/aragon/resource/pato1.png", 4,3);
 		mira = new Mira(0,0,"/fes/aragon/resource/mira.png",1,1);
 //		nave=new Nave(20,255,"/fes/aragon/resource/navefinal.png",2);
 //		nave.setrEnemigo(enemigos.getEnemigos());
@@ -69,9 +71,9 @@ public class JuegoController implements Initializable{
 			@Override
 			public void handle(long tiempoActual) {
 				double t = (tiempoActual - tiempoInicio) / 1000000000.00;
-				System.out.println(t);
 //				fondo.setTiempo(t);
 				pato1.setTiempo(t);
+				pato2.setTiempo(t);
 				calculosLogica();
 				pintar();
 			}
@@ -82,6 +84,7 @@ public class JuegoController implements Initializable{
     
     private void calculosLogica() {
     	this.pato1.logicaCalculos();
+    	this.pato2.logicaCalculos();
 //    	this.mira.logicaCalculos();
 //		this.enemigos.logicaCalculos();
 //		this.fondo.logicaCalculos();
@@ -117,6 +120,7 @@ private void pintar() {
 		
 		this.fondo.pintar(graficos);
 		this.pato1.pintar(graficos);
+		this.pato2.pintar(graficos);
 		this.mira.pintar(graficos);
 //		this.nave.pintar(graficos);
 //		this.enemigos.pintar(graficos);
@@ -145,7 +149,6 @@ private void pintar() {
     	/*PRUEBA*/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("HOLA IMPLEMETNTAR");
 		this.iniciar();
 		
 		

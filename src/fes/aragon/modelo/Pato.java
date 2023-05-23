@@ -2,6 +2,8 @@ package fes.aragon.modelo;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -22,24 +24,47 @@ public class Pato extends ComponentesJuego{
 	private boolean arriba = false;
 	private boolean abajo = false;
 	
+//	public TimerTask task=new TimerTask() {
+//		@Override
+//		public void run() {
+//			// TODO Auto-generated method stub
+//			System.out.println("TIMER GENERADO TXTO");
+//		}
+//		
+//	};
+//	
 	
 	public Pato(int x, int y, String imagen, int velocidad, int frames) {
 		super(x, y, imagen, velocidad);
 		this.frames=frames;
+		//coords aleatorias de aparicion del pato 
 		coordAlX = (int) (Math.random()*810);
-		System.out.println("COORD X: "+coordAlX);
 		coordAlY = (int) (Math.random()*350);
-		System.out.println("COORD Y: "+coordAlY);
+		//establecer el timer para el movimiento aleatorio del pat
+		this.temporizador();
 		String ruta="";
 		for(int i=1;i<=frames;i++) {
 			ruta=imagen.replace("1", i+"");
 			imagenes.add(new Image(ruta));
 		}
-		System.out.println("Ruta:"+ruta);
 //		imagenes.add(new Image(imagen)); 
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public void temporizador(){
+		Timer timer = new Timer();
+		TimerTask task =new TimerTask() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				System.out.println("TEMPORIZADOR PATOS");
+			}
+			
+		};		
+		timer.schedule(task,1,500);
+	}
 	
 	
 	
@@ -48,7 +73,7 @@ public class Pato extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stubs
 		graficos.drawImage(imagenes.get(indice),coordAlX,coordAlY, 72,54);
-		System.out.println("PATOPATOPATOPAT");
+//		System.out.println("PATOPATOPATOPAT");
 		
 	}
 
@@ -67,7 +92,9 @@ public class Pato extends ComponentesJuego{
 	@Override
 	public void logicaCalculos() {
 		// TODO Auto-generated method stub
-		System.out.println("Tiempo frame:"+tiempoFrame);
+		
+		//Parte que se encarga del calculo del tiempo y del gif
+//		System.out.println("Tiempo frame:"+tiempoFrame)
 		if((tiempo>tiempoFrame)) {
 			if(this.indice<imagenes.size()-1) {
 				indice++;
@@ -76,6 +103,13 @@ public class Pato extends ComponentesJuego{
 				indice=0;
 			}	
 		}
+		
+		//parte encargada del timer y el movimiento del pato
+//		System.out.println("PARTE DEL MOV DEL PATO");
+		
+		
+		
+		
 		
 	}
 	

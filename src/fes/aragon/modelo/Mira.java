@@ -48,7 +48,6 @@ public class Mira extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
 		graficos.drawImage(imagenes.get(indice),300,150, 150,150);
-		System.out.println("PATOPATOPATOPAT");
 		
 	}
 

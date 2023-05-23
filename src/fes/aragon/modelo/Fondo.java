@@ -30,7 +30,6 @@ public class Fondo extends ComponentesJuego {
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
 		graficos.drawImage(imagenes.get(indice),0,0, 900,600);
-		System.out.println("DIBUJARIMEANE");
 
 	}
 
