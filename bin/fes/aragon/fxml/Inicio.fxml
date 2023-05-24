@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #000; -fx-border-color: #067704;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controller.InicioController">
    <children>
-      <Text fx:id="txtTitulo" fill="#a1e864" layoutX="214.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duck Hunt" wrappingWidth="473.357421875">
+      <Text fx:id="txtTitulo" fill="#a1e864" layoutX="245.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duck Hunt" wrappingWidth="411.357421875">
          <font>
             <Font name="Rockwell Bold" size="87.0" />
          </font>

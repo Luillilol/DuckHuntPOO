@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #000; -fx-border-color: #067704;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fes.aragon.controller.InstruccionesController">
    <children>
-      <Text fx:id="txtTitulo" fill="#a1e864" layoutX="238.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucciones" wrappingWidth="423.357421875">
+      <Text fx:id="txtTitulo" fill="#a1e864" layoutX="278.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instrucciones" wrappingWidth="342.357421875">
          <font>
             <Font name="Rockwell Bold" size="59.0" />
          </font>
@@ -22,5 +22,15 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
+      <Text fill="#ebebeb" layoutX="81.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dispara a la mayor cantidad de patos que puedas durante 1 minuto." wrappingWidth="736.13671875">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <Text fill="#ebebeb" layoutX="81.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Para mover la mira ocupa las flechas del teclado y para disparar presiona la barra espaciadora." wrappingWidth="736.13671875">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

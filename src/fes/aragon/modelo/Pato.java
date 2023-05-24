@@ -111,7 +111,7 @@ public class Pato extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stubs
 		graficos.drawImage(imagenes.get(indice),coordenadasX,coordenadasY, 72,54);
-		graficos.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+//		graficos.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
 		
 //		System.out.println("PATOPATOPATOPAT");
 		

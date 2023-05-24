@@ -86,14 +86,14 @@ public class InicioController implements Initializable{
     @FXML
     void creditos(ActionEvent event) {
     	System.out.println("Credits");
-    	this.nuevaVentana("Creditos");
+    	this.nuevaVentana("Creditos",0);
     	this.cerrarVentana(btnCreditos);
     }
 
     @FXML
     void instrucciones(ActionEvent event) {
     	System.out.println("Instrucciones");
-    	this.nuevaVentana("Instrucciones");
+    	this.nuevaVentana("Instrucciones",0);
     	this.cerrarVentana(btnInstruciones);
     }
 
@@ -101,25 +101,29 @@ public class InicioController implements Initializable{
     void jugar(ActionEvent event) {
     	System.out.println("JUGAR");
     	this.hiloFondo.stop();
-    	this.nuevaVentana("Juego");
+    	this.nuevaVentana("Juego", 1);
     	this.cerrarVentana(btnJugar);
     	
 //    	JuegoController nuevo = new JuegoController();
 //    	nuevo.iniciar();
     }
     
-    public void nuevaVentana(String archivo) {
+    public void nuevaVentana(String archivo, int i) {
 		try  {
 		
 			FXMLLoader root = new FXMLLoader(getClass().getResource("/fes/aragon/fxml/"+archivo+".fxml"));
 			Scene scene = new Scene(root.load());
 			Stage escenario = new Stage();
-			JuegoController hola = root.getController();
-			hola.setEscena(scene);
+			
+			
 			 escenario.setScene(scene);
 //			escenario.initStyle(StageStyle.UNDECORATED);
 			escenario.initModality(Modality.APPLICATION_MODAL);
-			hola.eventosVentana();
+			if(i==1) {				
+				JuegoController hola = root.getController();
+				hola.setEscena(scene);
+				hola.eventosVentana();
+			}
 			escenario.show();
 
 		} catch (IOException e) {

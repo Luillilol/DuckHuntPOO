@@ -74,7 +74,7 @@ public class Mira extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
 		graficos.drawImage(imagenes.get(indice),coordenadaX,coordenadaY, 150,150);
-		graficos.strokeRect(r.getX()+45, r.getY()+45, r.getWidth(), r.getHeight());
+//		graficos.strokeRect(r.getX()+45, r.getY()+45, r.getWidth(), r.getHeight());
 		
 	}
 

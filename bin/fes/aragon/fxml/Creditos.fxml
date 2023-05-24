@@ -17,27 +17,27 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text fill="#fcabab" layoutX="103.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="González Falcón Luis Adrián" wrappingWidth="280.71728515625">
+      <Text fill="#fcabab" layoutX="103.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- González Falcón Luis Adrián" wrappingWidth="280.71728515625">
          <font>
             <Font name="Calibri Italic" size="22.0" />
          </font>
       </Text>
-      <Text fill="#fcabab" layoutX="103.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lili" wrappingWidth="280.71728515625">
+      <Text fill="#fcabab" layoutX="103.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Tello Aguilera Lilly Michelle" wrappingWidth="280.71728515625">
          <font>
             <Font name="Calibri Italic" size="22.0" />
          </font>
       </Text>
-      <Text fill="#fcabab" layoutX="103.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Robles Guerrero Andrea" wrappingWidth="280.71728515625">
+      <Text fill="#fcabab" layoutX="103.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Robles Guerrero Andrea" wrappingWidth="280.71728515625">
          <font>
             <Font name="Calibri Italic" size="22.0" />
          </font>
       </Text>
-      <Text fill="#fcabab" layoutX="103.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moctezuma Campos Jazmin Monserrat" wrappingWidth="379.357421875">
+      <Text fill="#fcabab" layoutX="103.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Moctezuma Campos Jazmin Monserrat" wrappingWidth="379.357421875">
          <font>
             <Font name="Calibri Italic" size="22.0" />
          </font>
       </Text>
-      <Text fill="#fcabab" layoutX="195.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facultad de Estudios Superiores Aragón" wrappingWidth="573.71728515625">
+      <Text fill="#fcabab" layoutX="195.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facultad de Estudios Superiores Aragón" wrappingWidth="573.71728515625">
          <font>
             <Font size="32.0" />
          </font>
@@ -47,5 +47,10 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
+      <Text fill="#fcabab" layoutX="433.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNAM" wrappingWidth="98.0">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
