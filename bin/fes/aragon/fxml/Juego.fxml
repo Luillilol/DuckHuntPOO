@@ -24,5 +24,10 @@
             <Font name="Consolas Bold" size="18.0" />
          </font>
       </Button>
+      <Text fx:id="txtTemporizador" fontSmoothingType="LCD" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXTO" wrappingWidth="61.13671875">
+         <font>
+            <Font name="Consolas Bold" size="22.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

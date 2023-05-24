@@ -57,6 +57,9 @@ public class JuegoController implements Initializable{
     private Text txtTiempo;
     @FXML
     private Button btnRegresar;
+    @FXML
+    private Text txtTemporizador;
+    
     
     
     
@@ -79,8 +82,9 @@ public class JuegoController implements Initializable{
     		public void run() {
     			// TODO Auto-generated method stub
     			contadorTiempoGlobal++;
+    			txtTemporizador.setText(""+(60-contadorTiempoGlobal));
     			System.out.println("TIEMPO:"+contadorTiempoGlobal);
-    			if(contadorTiempoGlobal==5) {
+    			if(contadorTiempoGlobal==60) {
     				timerGlobal.cancel();
     				pato1.setTemporizadorActivo(false);
     				pato2.setTemporizadorActivo(false);
@@ -98,9 +102,9 @@ public class JuegoController implements Initializable{
 		graficos = canvas.getGraphicsContext2D();
 		
 		/*carga la musica*/
-		MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
+		MusicaCiclica entrada = new MusicaCiclica("gameplayDH");
 		hiloFondo = new Thread(entrada);
-//		hiloFondo.start();
+		hiloFondo.start();
 		
 //		enemigos = new Enemigos(20, 20, null, 1);
 		
@@ -128,7 +132,7 @@ public class JuegoController implements Initializable{
 		AnimationTimer tiempo = new AnimationTimer() {
 			@Override
 			public void handle(long tiempoActual) {
-				if(contadorTiempoGlobal < 5) {					
+				if(contadorTiempoGlobal < 60) {					
 					double t = (tiempoActual - tiempoInicio) / 1000000000.00;
 	//				fondo.setTiempo(t);
 					pato1.setTiempo(t);
@@ -271,6 +275,8 @@ private void pintar() {
 			public void handle(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				hiloFondo.stop();
+				timerGlobal.cancel();
+				
 			}
 		});
 	}

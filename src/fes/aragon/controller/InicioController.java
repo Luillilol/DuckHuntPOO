@@ -1,6 +1,8 @@
 package fes.aragon.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import fes.aragon.extras.MusicaCiclica;
 import fes.aragon.controller.JuegoController;
@@ -8,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -17,15 +20,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
-public class InicioController {
+public class InicioController implements Initializable{
 	private Scene escena;
 	private Scene escenaJuego;
 	private Thread hiloFondo;
 
 	public JuegoController hola;
-    public void setHiloFondo(Thread hiloFondo) {
-		this.hiloFondo = hiloFondo;
-	}
+    
 
 	@FXML
     private Button btnCreditos;
@@ -59,9 +60,9 @@ public class InicioController {
 //		nave.setrEnemigo(enemigos.getEnemigos());
 //		disparos=new Disparos(0, 0, null, 2);
 //		nave.setDisparos(disparos);
-    	MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
+    	MusicaCiclica entrada = new MusicaCiclica("introDH");
 		hiloFondo = new Thread(entrada);
-//		hiloFondo.start();
+		hiloFondo.start();
 		
 	}
     
@@ -130,6 +131,17 @@ public class InicioController {
     public void cerrarVentana(Button boton) {
 		Stage stage = (Stage) boton.getScene().getWindow();
 		stage.close();
+	}
+    
+    public void setHiloFondo(Thread hiloFondo) {
+		this.hiloFondo = hiloFondo;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		iniciar();
+		
 	}
     
     
