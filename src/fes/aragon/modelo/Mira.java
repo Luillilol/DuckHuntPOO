@@ -11,6 +11,8 @@ import javafx.scene.shape.Rectangle;
 public class Mira extends ComponentesJuego{
 	
 	private Rectangle r;
+	private Rectangle patoEnemigo1;
+	private Rectangle patoEnemigo2;
 	private ArrayList<Image> imagenes=new ArrayList<>();
 	private int coordAlX;
 	private int coordAlY;
@@ -26,6 +28,9 @@ public class Mira extends ComponentesJuego{
 	private boolean izquierda = false;
 	private boolean arriba = false;
 	private boolean abajo = false;
+	private boolean disparo = false;
+	private boolean vidaPato1=true;	
+	private boolean vidaPato2=true;
 	
 	
 	public Mira(int x, int y, String imagen, int velocidad, int frames) {
@@ -43,11 +48,25 @@ public class Mira extends ComponentesJuego{
 //		System.out.println("Ruta:"+ruta);
 		imagenes.add(new Image(imagen)); 
 		
-		r= new Rectangle(x, y, 120,120);
+		r= new Rectangle(x, y, 60,60);
 		// TODO Auto-generated constructor stub
 	}
 	
 	
+	
+	
+	public void disparoPato() {
+		
+		System.out.println("Aqui checo si se dispara o no");
+		if(r.getBoundsInLocal().intersects(patoEnemigo1.getBoundsInLocal())) {
+			this.vidaPato1=false;
+//			System.out.println("COLISION PATO1"+this.vidaPato1);
+		}
+		if(r.getBoundsInLocal().intersects(patoEnemigo2.getBoundsInLocal())) {
+			this.vidaPato2=false;
+//			System.out.println("COLISION PATO2"+this.vidaPato2);
+		}
+	}
 	
 	
 
@@ -55,7 +74,7 @@ public class Mira extends ComponentesJuego{
 	public void pintar(GraphicsContext graficos) {
 		// TODO Auto-generated method stub
 		graficos.drawImage(imagenes.get(indice),coordenadaX,coordenadaY, 150,150);
-		graficos.strokeRect(r.getX()+15, r.getY()+15, r.getWidth(), r.getHeight());
+		graficos.strokeRect(r.getX()+45, r.getY()+45, r.getWidth(), r.getHeight());
 		
 	}
 
@@ -82,6 +101,7 @@ public class Mira extends ComponentesJuego{
 				System.out.println("ABAJO");
 				break;
 			case "SPACE":
+				disparoPato();
 //				disparo=true;
 				break;
 
@@ -115,21 +135,32 @@ public class Mira extends ComponentesJuego{
 	@Override
 	public void logicaCalculos() {
 		// TODO Auto-generated method stub
-		if (derecha) {
+		if (derecha && coordenadaX<750) {
 			coordenadaX += 3;
 		}
-		if (izquierda) {
+		if (izquierda && coordenadaX>0) {
 			coordenadaX -= 3;
 		}
-		if (arriba) {
+		if (arriba && coordenadaY>0) {
 			coordenadaY -= 3;
-		}
-		if (abajo) {
+		} 
+		if (abajo && coordenadaY<350) {
 			coordenadaY += 3;
 		}
 		
 		this.r.setX(coordenadaX);
 		this.r.setY(coordenadaY);
+		
+		/*Detectar colision mira con pato1 y pato2*/
+		if(r.getBoundsInLocal().intersects(patoEnemigo1.getBoundsInLocal())) {
+//			System.out.println("COLISION PATO1");
+		}
+		if(r.getBoundsInLocal().intersects(patoEnemigo2.getBoundsInLocal())) {
+//			System.out.println("COLISION PATO2");
+		}
+		
+		
+		
 		/*Colision otro codigo*/
 //		int i=0;
 //		boolean col=false;
@@ -146,6 +177,40 @@ public class Mira extends ComponentesJuego{
 	
 	public void setTiempo(double tiempo) {
 		this.tiempo = tiempo;
+	}
+
+
+
+
+
+	public Rectangle getPatoEnemigo1() {
+		return patoEnemigo1;
+	}
+
+	public void setPatoEnemigo1(Rectangle patoEnemigo) {
+		this.patoEnemigo1 = patoEnemigo;
+	}
+	
+	public Rectangle getPatoEnemigo2() {
+		return patoEnemigo2;
+	}
+
+	public void setPatoEnemigo2(Rectangle patoEnemigo) {
+		this.patoEnemigo2 = patoEnemigo;
+	}
+	
+	public boolean isVidaPato1() {
+		return vidaPato1;
+	}
+	public boolean isVidaPato2() {
+		return vidaPato2;
+	}
+	
+	public void setVidaPato1(boolean vidaPato1) {
+		this.vidaPato1 = vidaPato1;
+	}	
+	public void setVidaPato2(boolean vidaPato2) {
+		this.vidaPato2 = vidaPato2;
 	}
 
 }

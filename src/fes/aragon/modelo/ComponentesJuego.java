@@ -15,7 +15,7 @@ public abstract class ComponentesJuego {
 		this.x = x;
 		this.y = y;
 		this.imagen = imagen;
-		this.velocidad = velocidad;
+		this.velocidad = velocidad;		
 	}
 	
 	

@@ -34,7 +34,7 @@ public class InicioController {
 
     @FXML
     private Text txtTitulo;
-
+    
     /*Cosas para que el main funcione*/
     public void iniciar() {
 		componentesIniciar();
@@ -77,12 +77,6 @@ public class InicioController {
 			}
 		});
     }
-	
-    
-	
-    
-    
-    
     
     @FXML
     void creditos(ActionEvent event) {

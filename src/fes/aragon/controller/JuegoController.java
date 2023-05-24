@@ -2,6 +2,8 @@ package fes.aragon.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import fes.aragon.extras.MusicaCiclica;
 import fes.aragon.modelo.Fondo;
@@ -31,6 +33,11 @@ public class JuegoController implements Initializable{
 	private Pato pato2;
 	private Mira mira;
 	private Thread hiloFondo;
+//	public Timer timer = new Timer();
+
+	private int contadorTimerPato1=0;
+	private int contadorTimerPato2=0;
+	
 	
     @FXML
     private Canvas canvas;
@@ -48,7 +55,7 @@ public class JuegoController implements Initializable{
 		/*carga la musica*/
 		MusicaCiclica entrada = new MusicaCiclica("musica_entrada");
 		hiloFondo = new Thread(entrada);
-		hiloFondo.start();
+//		hiloFondo.start();
 		
 //		enemigos = new Enemigos(20, 20, null, 1);
 		
@@ -57,6 +64,12 @@ public class JuegoController implements Initializable{
 		pato1= new Pato(0, 0, "/fes/aragon/resource/pato1Volteado.png", 4,3);
 		pato2= new Pato(0, 0, "/fes/aragon/resource/pato1Volteado.png", 4,3);
 		mira = new Mira(0,0,"/fes/aragon/resource/mira.png",1,1);
+		
+		/*Traspaso las propiedades del rectangulo del pato al objeto mira*/
+		mira.setPatoEnemigo1(pato1.getR());
+		mira.setPatoEnemigo2(pato2.getR());
+		
+		
 //		nave=new Nave(20,255,"/fes/aragon/resource/navefinal.png",2);
 //		nave.setrEnemigo(enemigos.getEnemigos());
 //		disparos=new Disparos(0, 0, null, 2);
@@ -77,18 +90,90 @@ public class JuegoController implements Initializable{
 				calculosLogica();
 				pintar();
 			}
-
 		};
 		tiempo.start();
 	}
     
+    public void timerPatoRespawn(int i) {	
+//    	System.out.println("PATO 1 FALSO");
+    		if(contadorTimerPato1==0 && i==1) {   	    			
+    			System.out.println("EVENTO TIMER RWSPAWN PATO 1");
+    			Timer timer = new Timer();
+    			TimerTask task =new TimerTask() {
+
+    				@Override
+    				public void run() {
+    					// TODO Auto-generated method stub
+    					System.out.println("TIMER NUEVO PATO 1");
+    					pato1.setVida(true);
+    					mira.setVidaPato1(true);
+    					contadorTimerPato1=0;
+    					timer.cancel();
+    				}
+    				
+    			};	
+    			timer.scheduleAtFixedRate(task, 2000, 2000);
+		    	contadorTimerPato1++;    
+		    	System.out.println("TIMER ADENTTRO UNA VEZ PATO 1");
+    		}
+    		
+    		if(contadorTimerPato2==0 && i==2) {   	    			
+    			System.out.println("EVENTO TIMER RWSPAWN 2222222");
+    			Timer timer1 = new Timer();
+    			TimerTask task =new TimerTask() {
+
+    				@Override
+    				public void run() {
+    					// TODO Auto-generated method stub
+    					System.out.println("TIMER NUEVO222222");
+    					pato2.setVida(true);
+    					mira.setVidaPato2(true);
+    					contadorTimerPato2=0;
+    					timer1.cancel();
+    				}
+    				
+    			};	
+    			timer1.scheduleAtFixedRate(task, 2000, 2000);
+		    	contadorTimerPato2++;    
+		    	System.out.println("TIMER ADENTTRO UNA VEZ222222");
+    		}
+    		
+    		
+    }
+    
+    
     private void calculosLogica() {
+    	
     	this.pato1.logicaCalculos();
     	this.pato2.logicaCalculos();
     	this.mira.logicaCalculos();
+    	
+    	pato1.setVida(mira.isVidaPato1());
+    	pato2.setVida(mira.isVidaPato2());
+    	
+    	if(pato1.isVida()==false) {
+//    		System.out.println("entro a la condicion");
+    		timerPatoRespawn(1);    		
+    	}
+    	if(pato2.isVida()==false) {
+//    		System.out.println("entro a la condicion");
+    		timerPatoRespawn(2);    		
+    	}
+    	//llamar al afuncion del respawn del pato
+//    	System.out.println("logca juegocontroller");
+    	
+    	
+    	
+    	
+    	
+
 //		this.enemigos.logicaCalculos();
 //		this.fondo.logicaCalculos();
 //		this.nave.logicaCalculos();
+    	
+    	
+    	
+    	
 //		this.disparos.logicaCalculos();
 	}
     
@@ -119,9 +204,15 @@ public class JuegoController implements Initializable{
 private void pintar() {
 		
 		this.fondo.pintar(graficos);
-		this.pato1.pintar(graficos);
-		this.pato2.pintar(graficos);
+		if(pato1.isVida()==true)
+			this.pato1.pintar(graficos);
+		if(pato2.isVida()==true)		
+			this.pato2.pintar(graficos);
+		
 		this.mira.pintar(graficos);
+		
+		
+		
 //		this.nave.pintar(graficos);
 //		this.enemigos.pintar(graficos);
 //		this.disparos.pintar(graficos);

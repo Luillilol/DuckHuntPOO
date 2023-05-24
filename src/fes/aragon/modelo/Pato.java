@@ -31,15 +31,9 @@ public class Pato extends ComponentesJuego{
 	private boolean arriba = false;
 	private boolean abajo = false;
 	
-//	public TimerTask task=new TimerTask() {
-//		@Override
-//		public void run() {
-//			// TODO Auto-generated method stub
-//			System.out.println("TIMER GENERADO TXTO");
-//		}
-//		
-//	};
-//	
+	private boolean vida=true;
+
+	
 	//hola
 	public Pato(int x, int y, String imagen, int velocidad, int frames) {
 		super(x, y, imagen, velocidad);
@@ -51,7 +45,7 @@ public class Pato extends ComponentesJuego{
 		coordenadasY=coordAlY;
 		this.rumboAleatorio();
 		//establecer el timer para el movimiento aleatorio del pat
-		//this.temporizador();
+		this.temporizador();
 		String ruta="";
 		for(int i=1;i<=frames;i++) {
 			ruta=imagen.replace("1", i+"");
@@ -66,7 +60,7 @@ public class Pato extends ComponentesJuego{
 	private void rumboAleatorio() {
 		int i = (int) (Math.random()*2)+1; // i representa arriba y abajo
 		int j = (int) (Math.random()*2)+1; // j representa izq y derecha
-		System.out.println("Num aleatorio de derecha e izquierda");
+//		System.out.println("Num aleatorio de derecha e izquierda");
 //		System.out.println("num aleatorio:"+i);
 		if(i==1) {
 			this.arriba=true;
@@ -79,29 +73,29 @@ public class Pato extends ComponentesJuego{
 		if(j==1) {
 			this.izquierda=true;
 			this.derecha=false;
-			System.out.println("Izqueirda TRUE");
+//			System.out.println("Izqueirda TRUE");
 		}else if(j==2){
 			this.derecha=true;
 			this.izquierda=false;
-			System.out.println("DERECHA TRUE");			
+//			System.out.println("DERECHA TRUE");			
 		}
 		
 	}
 	
-	/*public void temporizador(){
+	public void temporizador(){
 		Timer timer = new Timer();
 		TimerTask task =new TimerTask() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				System.out.println("TEMPORIZADOR PATOS");
-//				rumboAleatorio();
+//				System.out.println("TEMPORIZADOR PATOS");
+				rumboAleatorio();
 			}
 			
 		};		
 		timer.schedule(task,1,1000);
-	}*/
+	}
 	
 	
 	
@@ -131,7 +125,7 @@ public class Pato extends ComponentesJuego{
 	@Override
 	public void logicaCalculos() {
 		// TODO Auto-generated method stub
-		System.out.println("logica calculos");
+//		System.out.println("logica calculos");
 		//Parte que se encarga del calculo del tiempo y del gif
 //		System.out.println("Tiempo frame:"+tiempoFrame)
 		
@@ -161,15 +155,15 @@ public class Pato extends ComponentesJuego{
 		
 		
 		if((this.derecha==true)&&(this.izquierda==false)) {
-			this.coordenadasX++;
+			this.coordenadasX+=2;
 		}else if(this.izquierda==true && this.derecha==false) {
-			this.coordenadasX--;
+			this.coordenadasX-=2;
 		}
 		
 		if(this.arriba==true && this.abajo==false) {
-			this.coordenadasY--;
+			this.coordenadasY-=2;
 		}else if(this.abajo==true && this.arriba==false) {
-			this.coordenadasY++;
+			this.coordenadasY+=2;
 		}
 		
 		this.r.setX(coordenadasX);
@@ -186,17 +180,31 @@ public class Pato extends ComponentesJuego{
 			}	
 		}
 		
-		//parte encargada del timer y el movimiento del pato
-//		System.out.println("PARTE DEL MOV DEL PATO");
-		
-		
-		
-		
-		
 	}
 	
 	public void setTiempo(double tiempo) {
 		this.tiempo = tiempo;
 	}
+	
+	
+	
+	public Rectangle getR() {
+		return r;
+	}
+
+	public void setR(Rectangle r) {
+		this.r = r;
+	}
+	
+	public boolean isVida() {
+		return vida;
+	}
+
+	public void setVida(boolean vida) {
+		this.vida = vida;
+	}
+
+
+	
 
 }
