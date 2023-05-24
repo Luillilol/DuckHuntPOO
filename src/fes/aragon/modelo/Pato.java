@@ -31,8 +31,11 @@ public class Pato extends ComponentesJuego{
 	private boolean arriba = false;
 	private boolean abajo = false;
 	
+	private boolean temporizadorActivo=true;
+	
 	private boolean vida=true;
 
+	
 	
 	//hola
 	public Pato(int x, int y, String imagen, int velocidad, int frames) {
@@ -90,7 +93,11 @@ public class Pato extends ComponentesJuego{
 			public void run() {
 				// TODO Auto-generated method stub
 //				System.out.println("TEMPORIZADOR PATOS");
-				rumboAleatorio();
+				if(temporizadorActivo==true) {					
+					rumboAleatorio();
+				}else if(temporizadorActivo==false) {
+					timer.cancel();
+				}
 			}
 			
 		};		
@@ -203,8 +210,9 @@ public class Pato extends ComponentesJuego{
 	public void setVida(boolean vida) {
 		this.vida = vida;
 	}
-
-
 	
+	public void setTemporizadorActivo(boolean temporizadorActivo) {
+		this.temporizadorActivo = temporizadorActivo;
+	}	
 
 }

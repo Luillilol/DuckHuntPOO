@@ -23,7 +23,11 @@ public class InicioController {
 	private Thread hiloFondo;
 
 	public JuegoController hola;
-    @FXML
+    public void setHiloFondo(Thread hiloFondo) {
+		this.hiloFondo = hiloFondo;
+	}
+
+	@FXML
     private Button btnCreditos;
 
     @FXML

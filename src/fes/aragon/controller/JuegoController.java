@@ -1,5 +1,6 @@
 package fes.aragon.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -14,14 +15,19 @@ import fes.aragon.modelo.Pato;
 //import fes.aragon.modelo.Fondo;
 //import fes.aragon.modelo.Nave;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -33,21 +39,60 @@ public class JuegoController implements Initializable{
 	private Pato pato2;
 	private Mira mira;
 	private Thread hiloFondo;
-//	public Timer timer = new Timer();
-
+	public int contadorTiempoGlobal=0;
+	
 	private int contadorTimerPato1=0;
 	private int contadorTimerPato2=0;
+	
+	private int contadorPuntos=0;
+	private Timer timerGlobal = new Timer();
 	
 	
     @FXML
     private Canvas canvas;
     
+    @FXML
+    private Text txtContadorPuntos;
+    @FXML
+    private Text txtTiempo;
+    @FXML
+    private Button btnRegresar;
+    
+    
+    
     public void iniciar() {
+    	/*
+    	 * Crear la funcion para el timer principal
+    	 * */
+    	timerGlobal();
+    	
 		componentesIniciar();		
 		pintar();
 		eventosTeclado();
 		ciclo();
 	}
+    
+    public void timerGlobal() {
+    	
+    	TimerTask task1 =  new TimerTask() {
+    		@Override
+    		public void run() {
+    			// TODO Auto-generated method stub
+    			contadorTiempoGlobal++;
+    			System.out.println("TIEMPO:"+contadorTiempoGlobal);
+    			if(contadorTiempoGlobal==5) {
+    				timerGlobal.cancel();
+    				pato1.setTemporizadorActivo(false);
+    				pato2.setTemporizadorActivo(false);
+    				btnRegresar.setDisable(false);
+    			}
+    			
+    		}
+    		
+    	};
+    	timerGlobal.schedule(task1, 0, 1000);
+    }
+    
     
     private void componentesIniciar() {
 		graficos = canvas.getGraphicsContext2D();
@@ -83,12 +128,17 @@ public class JuegoController implements Initializable{
 		AnimationTimer tiempo = new AnimationTimer() {
 			@Override
 			public void handle(long tiempoActual) {
-				double t = (tiempoActual - tiempoInicio) / 1000000000.00;
-//				fondo.setTiempo(t);
-				pato1.setTiempo(t);
-				pato2.setTiempo(t);
-				calculosLogica();
-				pintar();
+				if(contadorTiempoGlobal < 5) {					
+					double t = (tiempoActual - tiempoInicio) / 1000000000.00;
+	//				fondo.setTiempo(t);
+					pato1.setTiempo(t);
+					pato2.setTiempo(t);
+					calculosLogica();
+					pintar();
+				}else {
+					txtTiempo.setOpacity(1);
+					btnRegresar.setOpacity(1);
+				}
 			}
 		};
 		tiempo.start();
@@ -96,7 +146,8 @@ public class JuegoController implements Initializable{
     
     public void timerPatoRespawn(int i) {	
 //    	System.out.println("PATO 1 FALSO");
-    		if(contadorTimerPato1==0 && i==1) {   	    			
+    		if(contadorTimerPato1==0 && i==1) {  
+    			contadorPuntos+=100;
     			System.out.println("EVENTO TIMER RWSPAWN PATO 1");
     			Timer timer = new Timer();
     			TimerTask task =new TimerTask() {
@@ -117,7 +168,8 @@ public class JuegoController implements Initializable{
 		    	System.out.println("TIMER ADENTTRO UNA VEZ PATO 1");
     		}
     		
-    		if(contadorTimerPato2==0 && i==2) {   	    			
+    		if(contadorTimerPato2==0 && i==2) {   	   
+    			contadorPuntos+=100;
     			System.out.println("EVENTO TIMER RWSPAWN 2222222");
     			Timer timer1 = new Timer();
     			TimerTask task =new TimerTask() {
@@ -152,29 +204,17 @@ public class JuegoController implements Initializable{
     	pato2.setVida(mira.isVidaPato2());
     	
     	if(pato1.isVida()==false) {
-//    		System.out.println("entro a la condicion");
+//    		System.out.println("entro a la condicion");    		
     		timerPatoRespawn(1);    		
     	}
     	if(pato2.isVida()==false) {
 //    		System.out.println("entro a la condicion");
+//    		contadorPuntos++;
     		timerPatoRespawn(2);    		
     	}
     	//llamar al afuncion del respawn del pato
 //    	System.out.println("logca juegocontroller");
-    	
-    	
-    	
-    	
-    	
 
-//		this.enemigos.logicaCalculos();
-//		this.fondo.logicaCalculos();
-//		this.nave.logicaCalculos();
-    	
-    	
-    	
-    	
-//		this.disparos.logicaCalculos();
 	}
     
     private void eventosTeclado() {
@@ -207,15 +247,13 @@ private void pintar() {
 		if(pato1.isVida()==true)
 			this.pato1.pintar(graficos);
 		if(pato2.isVida()==true)		
-			this.pato2.pintar(graficos);
-		
+			this.pato2.pintar(graficos);		
 		this.mira.pintar(graficos);
 		
+		txtContadorPuntos.setText("Puntos "+contadorPuntos);
 		
 		
-//		this.nave.pintar(graficos);
-//		this.enemigos.pintar(graficos);
-//		this.disparos.pintar(graficos);
+
 		
 	}
     
@@ -236,6 +274,44 @@ private void pintar() {
 			}
 		});
 	}
+    
+    
+    
+    
+    @FXML
+    void regresar(ActionEvent event) {
+    	System.out.println("BOTON DE REGRESAR");
+    	this.hiloFondo.stop();
+    	this.nuevaVentana("Inicio");
+    	this.cerrarVentana(btnRegresar);
+    	
+    }
+    
+    public void nuevaVentana(String archivo) {
+		try  {
+		
+			FXMLLoader root = new FXMLLoader(getClass().getResource("/fes/aragon/fxml/"+archivo+".fxml"));
+			Scene scene = new Scene(root.load());
+			Stage escenario = new Stage();
+			InicioController hola = root.getController();
+			hola.setEscena(scene);
+			escenario.setScene(scene);
+			hola.setHiloFondo(this.hiloFondo);
+//			escenario.initStyle(StageStyle.UNDECORATED);
+			escenario.initModality(Modality.APPLICATION_MODAL);
+			hola.eventosVentana();
+			escenario.show();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+    
+    public void cerrarVentana(Button boton) {
+		Stage stage = (Stage) boton.getScene().getWindow();
+		stage.close();
+	}
 
     
     	/*PRUEBA*/
@@ -246,8 +322,4 @@ private void pintar() {
 		}
 		
 	}
-    
-    
-    
-    
 }
